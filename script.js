@@ -153,8 +153,6 @@ function raffleDozens() {
       animalValueRandom = Math.ceil(Math.random() * 99);
     } else if (drawnAnimals.includes(animalValueRandom)) {
       animalValueRandom = Math.ceil(Math.random() * 99);
-    } else if (animalValueRandom == 0) {
-      animalValueRandom = Math.ceil(Math.random() * 99);
     } else {
       drawnAnimals.push(animalValueRandom);
     }
@@ -173,6 +171,7 @@ function selectAnimals() {
   const selectElement = document.createElement("select");
   selectElement.setAttribute("class", "form-select");
   const textSelectElement = document.createElement("h3");
+  textSelectElement.setAttribute("class", "textSelectOptions");
   textSelectElement.innerText = "Escolha uma opção:";
   const animals = [
     "Avestruz",
@@ -223,6 +222,7 @@ function selectDozens() {
   const selectElement = document.createElement("select");
   selectElement.setAttribute("class", "form-select");
   const textSelectElement = document.createElement("h3");
+  textSelectElement.setAttribute("class", "textSelectOptions");
   textSelectElement.innerText = "Escolha uma opção:";
 
   for (let i = 0; i < 100; i++) {
