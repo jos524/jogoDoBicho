@@ -1,13 +1,43 @@
 .container-lg {
-  margin-top: 5%;
+  margin-top: 5px;
   border-style: ridge;
-  padding: 1%;
   color: black;
   background-color: white;
   border-radius: 25px;
 }
 body {
   background-color: black;
+  font-family: monospace;
+  font-weight: 900;
+}
+
+.card-img-top {
+  display: flex;
+  align-self: center;
+  width: 50%;
+}
+
+.nome_jogo,
+.select_aposta {
+  text-align: center;
+  font-family: monospace;
+  font-weight: 900;
+  padding-top: 15px;
+}
+
+.textSelectOptions {
+  text-align: center;
+  font-weight: 900;
+}
+
+#result {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 20px;
+}
+
+.form-check-input {
+  border: 2px solid #000;
 }
 
 #resultado {
@@ -16,4 +46,47 @@ body {
 
 .form-check-label {
   margin-bottom: 1%;
+}
+
+@media (max-width: 500px) {
+  .container-lg {
+    width: 95%;
+    border-radius: 15px;
+    border-style: none;
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 30px;
+    padding-top: 15px;
+  }
+
+  .card-img-top {
+    width: 100%;
+  }
+}
+
+@media (max-width: 999px) {
+  .container-lg {
+    width: 90%;
+    border-radius: 15px;
+    border-style: none;
+    margin-top: 10px;
+  }
+  .card-img-top {
+    width: 75%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container-lg {
+    width: 90%;
+    border-radius: 15px;
+    border-style: none;
+    margin-top: 10px;
+  }
+
+  .card-img-top {
+    width: 45%;
+  }
 }
