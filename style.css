@@ -1,0 +1,19 @@
+.container-lg {
+  margin-top: 5%;
+  border-style: ridge;
+  padding: 1%;
+  color: black;
+  background-color: white;
+  border-radius: 25px;
+}
+body {
+  background-color: black;
+}
+
+#resultado {
+  margin-top: 1%;
+}
+
+.form-check-label {
+  margin-bottom: 1%;
+}
