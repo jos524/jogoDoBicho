@@ -6,22 +6,12 @@ function calculaSorteio() {
   if (selectTypeOfBet == "animal") {
     const valueOfAnimal = Number(document.querySelector(".form-select").value);
     const valueOfBet = Number(document.getElementById("valueOfBet").value);
-    const drawnAnimals = raffleAnimals();
-
-    if (valueOfAnimal == drawnAnimals[0]) {
-      const earnedValue = valueOfBet * 12;
-      showResult(drawnAnimals, valueOfAnimal, valueOfBet, "12x", earnedValue);
-    } else if (drawnAnimals.includes(valueOfAnimal)) {
-      const earnedValue = valueOfBet * 3;
-      showResult(drawnAnimals, valueOfAnimal, valueOfBet, "3x", earnedValue);
-    } else {
-      console.log(valueOfAnimal);
-      showResult(drawnAnimals, valueOfAnimal, valueOfBet, null, null);
-    }
+    const drawnAnimals = raffle();
+    verifyAnimal(drawnAnimals, valueOfAnimal, valueOfBet);
   } else if (selectTypeOfBet == "dozens") {
     const valueOfDozen = Number(document.querySelector(".form-select").value);
     const valueOfBet = Number(document.getElementById("valueOfBet").value);
-    const drawnDozens = raffleDozens();
+    const drawnDozens = raffle();
 
     if (valueOfDozen == drawnDozens[0]) {
       const earnedValue = valueOfBet * 50;
@@ -38,6 +28,67 @@ function calculaSorteio() {
         showResult(drawnDozens, valueOfDozen, valueOfBet);
       }
     }
+  }
+}
+
+function verifyAnimal(drawnAnimals, valueOfAnimal, valueOfBet) {
+  let animals = {
+    1: [1, 2, 3, 4],
+    2: [5, 6, 7, 8],
+    3: [9, 10, 11, 12],
+    4: [13, 14, 15, 16],
+    5: [17, 18, 19, 20],
+    6: [21, 22, 23, 24],
+    7: [25, 26, 27, 28],
+    8: [29, 30, 31, 32],
+    9: [33, 34, 35, 36],
+    10: [37, 38, 39, 40],
+    11: [41, 42, 43, 44],
+    12: [45, 46, 47, 48],
+    13: [49, 50, 51, 52],
+    14: [53, 54, 55, 56],
+    15: [57, 58, 59, 60],
+    16: [61, 62, 63, 64],
+    17: [65, 66, 67, 68],
+    18: [69, 70, 71, 72],
+    19: [73, 74, 75, 76],
+    20: [77, 78, 79, 80],
+    21: [81, 82, 83, 84],
+    22: [85, 86, 87, 88],
+    23: [89, 90, 91, 92],
+    24: [93, 94, 95, 96],
+    25: [97, 98, 99, 0],
+  };
+
+  let headWon = [];
+  let includesWon = [];
+
+  drawnAnimals = [5, 6, 67];
+
+  for (let i = 0; i < animals[valueOfAnimal].length; i++) {
+    if (animals[valueOfAnimal][i] == drawnAnimals[0]) {
+      headWon.push(true);
+    } else {
+      headWon.push(false);
+    }
+  }
+
+  for (let i = 0; i < drawnAnimals.length; i++) {
+    if (animals[valueOfAnimal].includes(drawnAnimals[i])) {
+      includesWon.push(true);
+    } else {
+      includesWon.push(false);
+    }
+  }
+
+  if (headWon.includes(true)) {
+    const earnedValue = valueOfBet * 12;
+    showResult(drawnAnimals, valueOfAnimal, valueOfBet, "12x", earnedValue);
+  } else if (includesWon.includes(true)) {
+    const earnedValue = valueOfBet * 3;
+    showResult(drawnAnimals, valueOfAnimal, valueOfBet, "3x", earnedValue);
+  } else {
+    showResult(drawnAnimals, valueOfAnimal, valueOfBet, null, null);
   }
 }
 
@@ -112,7 +163,7 @@ function showResult(
 
   if (multiplier != null && earnedValue != null) {
     const textOfearnedValue = document.createElement("p");
-    textOfearnedValue.innerText = `Você ganhou um multiplicador de ${multiplier}, ou seja, ganhou R$${earnedValue}. Parabéns!!!`;
+    textOfearnedValue.innerText = `Parabéns você ganhou! multiplicador de ${multiplier}, ou seja, ganhou R$${earnedValue}.`;
     resultElement.appendChild(textOfearnedValue);
   } else {
     const textOfLose = document.createElement("p");
@@ -121,30 +172,7 @@ function showResult(
   }
 }
 
-function raffleAnimals() {
-  const drawnAnimals = [];
-  let animalValueRandom;
-  for (let i = 0; i < 3; i++) {
-    animalValueRandom = Math.ceil(Math.random() * 25);
-    if (drawnAnimals.includes(undefined)) {
-      animalValueRandom = Math.ceil(Math.random() * 25);
-    } else if (drawnAnimals.includes(animalValueRandom)) {
-      animalValueRandom = Math.ceil(Math.random() * 25);
-    } else if (animalValueRandom == 0) {
-      animalValueRandom = Math.ceil(Math.random() * 25);
-    } else {
-      drawnAnimals.push(animalValueRandom);
-    }
-  }
-
-  if (drawnAnimals.includes(undefined) || drawnAnimals.length != 3) {
-    const newDrawnAnimals = raffleAnimals();
-    return newDrawnAnimals;
-  }
-  return drawnAnimals;
-}
-
-function raffleDozens() {
+function raffle() {
   const drawnAnimals = [];
   let animalValueRandom;
   for (let i = 0; i < 3; i++) {
